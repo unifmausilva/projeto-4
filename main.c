@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include "clientes.h"
+
 
 int main (){
   int opcao;
   printf("Digite uma opção\n");
-  printf("====================\n");
+  printf("==========================\n");
   printf("1 - Cadastrar cliente\n");
   printf("\n");
   printf("2 - Apagar cliente\n ");
@@ -19,7 +21,8 @@ int main (){
   printf("7 - Transferência entre contas");
   printf("\n");
   printf("8 - Sair\n");
-  printf("=====================\n");
+  printf("\n\t");
+  printf("===========================\n");
   
   if(scanf("%d", &opcao) != 1){
     printf("Erro ao ler a opção\n");
