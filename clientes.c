@@ -54,7 +54,12 @@ void cadastrar_cliente(){
   printf("Digite uma senha de 4 digitos: \n");
   printf("===========================");
 
-  if(scanf("%d" , &deposito ))
+  if(scanf("%d" , &deposito ) != 1){
+    printf("Erro ao ler a opção\n");
+    return 1;
+  }
+
+  if(scanf("%d" , &))
   
   
 }
