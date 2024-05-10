@@ -98,8 +98,9 @@ void debito(Cliente clientes[], int total_clientes) {
     for (int i = 0; i < total_clientes; i++) {
         if (strcmp(clientes[i].cpf, cpf) == 0 && strcmp(clientes[i].senha, senha) == 0) {
             cliente_encontrado = 1;
-            if (clientes[i].saldo - valor >= clientes[i].saldo_negativo) {
-                clientes[i].saldo -= valor;
+            float taxa = strcmp(clientes[i].tipo_conta, "comum") == 0 ? 0.05 * valor : 0.03 * valor;
+            if (clientes[i].saldo - valor - taxa >= clientes[i].saldo_negativo) {
+                clientes[i].saldo -= (valor + taxa);
                 printf("Débito realizado com sucesso. Novo saldo: %.2f\n", clientes[i].saldo);
             } else {
                 printf("Saldo insuficiente para realizar o débito.\n");
@@ -136,7 +137,46 @@ void deposito(Cliente clientes[], int total_clientes) {
 }
 
 void extrato(Cliente clientes[], int total_clientes) {
-    // Implementar função de extrato
+    char cpf[12];
+    char senha[20];
+    FILE *arquivo;
+    float taxa;
+    float valor;
+    int cliente_encontrado = 0;
+
+    printf("Digite o CPF do cliente: ");
+    scanf("%s", cpf);
+    printf("Digite a senha: ");
+    scanf("%s", senha);
+
+    for (int i = 0; i < total_clientes; i++) {
+        if (strcmp(clientes[i].cpf, cpf) == 0 && strcmp(clientes[i].senha, senha) == 0) {
+            cliente_encontrado = 1;
+            arquivo = fopen("extrato.txt", "w");
+            if (arquivo == NULL) {
+                printf("Erro ao abrir o arquivo.\n");
+                return;
+            }
+            fprintf(arquivo, "Extrato do cliente %s\n", clientes[i].nome);
+            fprintf(arquivo, "CPF: %s\n", clientes[i].cpf);
+            for (int j = 0; j < clientes[i].num_operacoes; j++) {
+                valor = clientes[i].operacoes[j];
+                taxa = strcmp(clientes[i].tipo_conta, "comum") == 0 ? 0.05 * valor : 0.03 * valor;
+                if (valor < 0) {
+                    fprintf(arquivo, "Débito: %.2f\n", valor);
+                    fprintf(arquivo, "Tarifa: %.2f\n", taxa);
+                } else {
+                    fprintf(arquivo, "Depósito: %.2f\n", valor);
+                }
+            }
+            fclose(arquivo);
+            printf("Extrato gerado com sucesso. Verifique o arquivo extrato.txt.\n");
+            break;
+        }
+    }
+    if (!cliente_encontrado) {
+        printf("CPF ou senha incorretos.\n");
+    }
 }
 
 void transferencia(Cliente clientes[], int total_clientes) {
