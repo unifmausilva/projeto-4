@@ -113,7 +113,26 @@ void debito(Cliente clientes[], int total_clientes) {
 }
 
 void deposito(Cliente clientes[], int total_clientes) {
-    // Implementar função de depósito
+    char cpf[12];
+    float valor;
+
+    printf("Digite o CPF do cliente: ");
+    scanf("%s", cpf);
+    printf("Digite o valor a ser depositado: ");
+    scanf("%f", &valor);
+
+    int cliente_encontrado = 0;
+    for (int i = 0; i < total_clientes; i++) {
+        if (strcmp(clientes[i].cpf, cpf) == 0) {
+            cliente_encontrado = 1;
+            clientes[i].saldo += valor;
+            printf("Depósito realizado com sucesso. Novo saldo: %.2f\n", clientes[i].saldo);
+            break;
+        }
+    }
+    if (!cliente_encontrado) {
+        printf("CPF não encontrado.\n");
+    }
 }
 
 void extrato(Cliente clientes[], int total_clientes) {
