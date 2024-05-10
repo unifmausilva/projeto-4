@@ -17,6 +17,7 @@ int main() {
     Cliente clientes[MAX_CLIENTES];
     int total_clientes = carregarClientes(clientes);
 
+
     int opcao;
     char cpf[12];
     int indice_cliente;
