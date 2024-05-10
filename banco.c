@@ -144,8 +144,7 @@ void extrato(Cliente clientes[], int total_clientes) {
     float taxa;
     float valor;
     int cliente_encontrado = 0;
-  
-    
+
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
     printf("Digite a senha: ");
@@ -227,8 +226,10 @@ void transferencia(Cliente clientes[], int total_clientes) {
         printf("CPF ou senha da conta de origem incorretos.\n");
     }
 }
-    
+
+
 void clearBuffer(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
+

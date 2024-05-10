@@ -1,27 +1,38 @@
 
+
 //   gcc *.c & ./a.out
 
->>>>>>> 6c3e9ae (modificando as funçoes)
+
 #include <stdio.h>
 #include <stdlib.h>
 
 
-#include "clientes.h"
+
+int encontrarCliente(Cliente clientes[], int total_clientes, char cpf[]) {
+    for (int i = 0; i < total_clientes; i++) {
+        if (strcmp(clientes[i].cpf, cpf) == 0) {
+            return i;
+        }
+    }
+    return -1; 
+}
+
 
 int main() {
-    Cliente listaClientes[MAX_CLIENTES];
-    Operacao listaOperacoes[MAX_OPERACOES];
-    int quantidadeClientes = 0;
-    int quantidadeOperacoes = 0;
-    int opcao;
+    Cliente clientes[MAX_CLIENTES];
+    int total_clientes = carregarClientes(clientes);
 
+    int opcao;
+    char cpf[12];
+    int indice_cliente;
+    printf("aaa%d\n",total_clientes);
     do {
-        printf("\nMenu:\n");
+        printf("\nMenu de Opcoes:\n");
         printf("1. Novo cliente\n");
         printf("2. Apagar cliente\n");
         printf("3. Listar clientes\n");
-        printf("4. Débito\n");
-        printf("5. Depósito\n");
+        printf("4. Debito\n");
+        printf("5. Deposito\n");
         printf("6. Extrato\n");
         printf("7. Transferencia Entre Contas\n");
         printf("0. Sair\n");
@@ -32,9 +43,11 @@ int main() {
             printf("Erro\n");
             continue;
 
+        }
+    } while (opcao != 0);
+
 
         switch (opcao) {
-
             case 1:
                 novoCliente(clientes, &total_clientes);
                 break;
@@ -45,7 +58,6 @@ int main() {
                 printf("%d\n",total_clientes);
                 listarClientes(clientes, total_clientes);
                 break;
-
             case 4:
                 printf("Digite o CPF do cliente para fazer o debito: ");
                 if (scanf("%s", cpf) != 1) {
@@ -88,6 +100,6 @@ int main() {
         }
     } while (opcao != 0);
 
+    return 0;
+}
 
-  }while(opcao  != 8);
-  return 0;
