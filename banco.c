@@ -83,7 +83,33 @@ void listarClientes(Cliente clientes[], int total_clientes) {
 }
 
 void debito(Cliente clientes[], int total_clientes) {
-    // Implementar função de débito
+    char cpf[12];
+    char senha[20];
+    float valor;
+
+    printf("Digite o CPF do cliente: ");
+    scanf("%s", cpf);
+    printf("Digite a senha: ");
+    scanf("%s", senha);
+    printf("Digite o valor a ser debitado: ");
+    scanf("%f", &valor);
+
+    int cliente_encontrado = 0;
+    for (int i = 0; i < total_clientes; i++) {
+        if (strcmp(clientes[i].cpf, cpf) == 0 && strcmp(clientes[i].senha, senha) == 0) {
+            cliente_encontrado = 1;
+            if (clientes[i].saldo - valor >= clientes[i].saldo_negativo) {
+                clientes[i].saldo -= valor;
+                printf("Débito realizado com sucesso. Novo saldo: %.2f\n", clientes[i].saldo);
+            } else {
+                printf("Saldo insuficiente para realizar o débito.\n");
+            }
+            break;
+        }
+    }
+    if (!cliente_encontrado) {
+        printf("CPF ou senha incorretos.\n");
+    }
 }
 
 void deposito(Cliente clientes[], int total_clientes) {
