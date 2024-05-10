@@ -120,7 +120,9 @@ void deposito(Cliente clientes[], int total_clientes) {
 
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
+
     printf("Digite o valor que sera depositado: ");
+
     scanf("%f", &valor);
 
     int cliente_encontrado = 0;
@@ -129,6 +131,9 @@ void deposito(Cliente clientes[], int total_clientes) {
             cliente_encontrado = 1;
             clientes[i].saldo += valor;
             printf("Depósito realizado. %.2f\n", clientes[i].saldo);
+
+            printf("Depósito realizado com sucesso. Novo saldo: %.2f\n", clientes[i].saldo);
+
             break;
         }
     }
