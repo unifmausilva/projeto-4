@@ -31,7 +31,7 @@ int main (){
 
   switch (opcao){
     case 1:
-    printf("Cadastrar cliente");
+    cadastrar_cliente();
     break;
     case 2:
     printf("Apagar cliente");
