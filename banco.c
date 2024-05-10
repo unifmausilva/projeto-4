@@ -102,7 +102,10 @@ void debito(Cliente clientes[], int total_clientes) {
             float taxa = strcmp(clientes[i].tipo_conta, "comum") == 0 ? 0.05 * valor : 0.03 * valor;
             if (clientes[i].saldo - valor - taxa >= clientes[i].saldo_negativo) {
                 clientes[i].saldo -= (valor + taxa);
+
                 printf("Débito realizado %.2f\n", clientes[i].saldo);
+
+
             } else {
                 printf("Saldo insuficiente\n");
             }
@@ -149,6 +152,7 @@ void extrato(Cliente clientes[], int total_clientes) {
     float taxa;
     float valor;
     int cliente_encontrado = 0;
+
 
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
