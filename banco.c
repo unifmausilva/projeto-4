@@ -35,7 +35,16 @@ void novoCliente(Cliente clientes[], int *total_clientes) {
     scanf("%f", &novo_cliente.saldo);
     printf("Digite a senha do cliente: ");
     scanf("%s", novo_cliente.senha);
-    novo_cliente.saldo_negativo = strcmp(novo_cliente.tipo_conta, "comum") == 0 ? -1000.0 : -5000.0;
+
+    if (strcmp(novo_cliente.tipo_conta, "comum") == 0) {
+        novo_cliente.saldo_negativo = -1000.0;
+    } else if (strcmp(novo_cliente.tipo_conta, "plus") == 0) {
+        novo_cliente.saldo_negativo = -5000.0;
+    } else {
+        printf("Tipo de conta inválido!\n");
+        return;
+    }
+
     novo_cliente.num_operacoes = 0;
     clientes[*total_clientes] = novo_cliente;
     (*total_clientes)++;
