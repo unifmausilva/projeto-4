@@ -12,7 +12,10 @@ int main() {
         printf("1. Novo cliente\n");
         printf("2. Apagar cliente\n");
         printf("3. Listar clientes\n");
-        // Adicione aqui as outras opções do menu...
+        printf("4. Débito\n");
+        printf("5. Depósito\n");
+        printf("6. Extrato\n");
+        printf("7. Transferência Entre Contas\n");
         printf("0. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
@@ -27,9 +30,20 @@ int main() {
             case 3:
                 listarClientes(clientes, total_clientes);
                 break;
-            // Implemente aqui os casos das outras opções do menu...
+            case 4:
+                debito(clientes, total_clientes);
+                break;
+            case 5:
+                deposito(clientes, total_clientes);
+                break;
+            case 6:
+                extrato(clientes, total_clientes);
+                break;
+            case 7:
+                transferencia(clientes, total_clientes);
+                break;
             case 0:
-                printf("Saindo...\n");
+                printf("Saindo\n");
                 break;
             default:
                 printf("Opcao invalida!\n");

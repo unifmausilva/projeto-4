@@ -36,6 +36,7 @@ void novoCliente(Cliente clientes[], int *total_clientes) {
     printf("Digite a senha do cliente: ");
     scanf("%s", novo_cliente.senha);
     novo_cliente.saldo_negativo = strcmp(novo_cliente.tipo_conta, "comum") == 0 ? -1000.0 : -5000.0;
+    novo_cliente.num_operacoes = 0;
     clientes[*total_clientes] = novo_cliente;
     (*total_clientes)++;
     salvarClientes(clientes, *total_clientes);
@@ -71,4 +72,19 @@ void listarClientes(Cliente clientes[], int total_clientes) {
         printf("Nome: %s, CPF: %s\n", clientes[i].nome, clientes[i].cpf);
     }
 }
-// Implemente aqui as demais funções...
+
+void debito(Cliente clientes[], int total_clientes) {
+    // Implementar função de débito
+}
+
+void deposito(Cliente clientes[], int total_clientes) {
+    // Implementar função de depósito
+}
+
+void extrato(Cliente clientes[], int total_clientes) {
+    // Implementar função de extrato
+}
+
+void transferencia(Cliente clientes[], int total_clientes) {
+    // Implementar função de transferência
+}
