@@ -1,34 +1,23 @@
 #include <stdio.h>
-#include "clientes.h"
+#include <stdlib.h>
+#include "banco.h"
 
+int main() {
+    Cliente clientes[MAX_CLIENTES];
+    int total_clientes = carregarClientes(clientes);
 
-int main (){
-  int opcao;
-  printf("Digite uma opção\n");
-  printf("==========================\n");
-  printf("1 - Cadastrar cliente\n");
-  printf("\n");
-  printf("2 - Apagar cliente\n ");
-  printf("\n");
-  printf("3 - Listar clientes\n");
-  printf("\n");
-  printf("4 - Débito\n");
-  printf("\n");
-  printf("5 - Depósito\n");
-  printf("\n");
-  printf("6 - Extrato\n");
-  printf("\n");
-  printf("7 - Transferência entre contas");
-  printf("\n");
-  printf("8 - Sair\n");
-  printf("\n\t");
-  printf("===========================\n");
-  
-  if(scanf("%d", &opcao) != 1){
-    printf("Erro ao ler a opção\n");
-    return 1;
-  }
+    int opcao;
+    do {
+        printf("\nMenu de Opcoes:\n");
+        printf("1. Novo cliente\n");
+        printf("2. Apagar cliente\n");
+        printf("3. Listar clientes\n");
+        // Adicione aqui as outras opções do menu...
+        printf("0. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
 
+<<<<<<< HEAD
   switch (opcao){
     case 1:
     cadastrar_cliente();
@@ -60,6 +49,26 @@ int main (){
     
   }while(opcao  != 8);
   return 0;
+=======
+        switch (opcao) {
+            case 1:
+                novoCliente(clientes, &total_clientes);
+                break;
+            case 2:
+                apagarCliente(clientes, &total_clientes);
+                break;
+            case 3:
+                listarClientes(clientes, total_clientes);
+                break;
+            // Implemente aqui os casos das outras opções do menu...
+            case 0:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opcao invalida!\n");
+        }
+    } while (opcao != 0);
+>>>>>>> refs/remotes/origin/Maurilio
 
-  
+    return 0;
 }
