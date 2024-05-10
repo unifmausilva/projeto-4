@@ -153,7 +153,6 @@ void extrato(Cliente clientes[], int total_clientes) {
     float valor;
     int cliente_encontrado = 0;
 
-
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
     printf("Digite a senha: ");
