@@ -43,9 +43,9 @@ int main() {
           case 5:
               depositar(clientes, num_clientes);
               break;
-    case 6:
-    printf("Extrato");
-    break;
+          case 6:
+          extrato(clientes, num_clientes);
+          break;
     case 7:
     printf("Transferência entre contas");
     break;
