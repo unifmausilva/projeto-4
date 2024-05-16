@@ -42,6 +42,7 @@ int main() {
         }
 
         switch (opcao) {
+<<<<<<< HEAD
             case 1:
                 novoCliente(clientes, &total_clientes);
                 break;

@@ -193,6 +193,61 @@ void listar_clientes(Cliente clientes[], int num_clientes) {
       }
   }
 
+  void transferencia(Cliente clientes[], int num_clientes) {
+      char cpf_origem[12];
+      printf("Digite o CPF do cliente de origem: ");
+      scanf("%s", cpf_origem);
+
+      Cliente *cliente_origem = buscar_cliente_por_cpf(clientes, num_clientes, cpf_origem);
+      if (cliente_origem == NULL) {
+          printf("Cliente de origem não encontrado.\n");
+          return;
+      }
+
+      printf("Senha: ");
+      char senha[5];
+      scanf("%s", senha);
+
+      if (strcmp(cliente_origem->senha, senha) != 0) {
+          printf("Senha incorreta.\n");
+          return;
+      }
+
+      char cpf_destino[12];
+      printf("Digite o CPF do cliente de destino: ");
+      scanf("%s", cpf_destino);
+
+      Cliente *cliente_destino = buscar_cliente_por_cpf(clientes, num_clientes, cpf_destino);
+      if (cliente_destino == NULL) {
+          printf("Cliente de destino não encontrado.\n");
+          return;
+      }
+
+      float valor;
+      printf("Valor da transferência: ");
+      scanf("%f", &valor);
+
+      // Verifica se há saldo suficiente na conta de origem
+      if (cliente_origem->saldo < valor) {
+          printf("Saldo insuficiente para realizar a transferência.\n");
+          return;
+      }
+
+      // Atualiza o saldo das contas de origem e destino
+      cliente_origem->saldo -= valor;
+      cliente_destino->saldo += valor;
+
+      // Registra as operações
+      Operacao op_origem = {TRANSFERENCIA, "", valor, 0}; // Transferência não possui tarifa
+      Operacao op_destino = {TRANSFERENCIA, "", valor, 0};
+      strcpy(op_origem.cpf_cliente, cpf_origem);
+      strcpy(op_destino.cpf_cliente, cpf_destino);
+      operacoes[num_operacoes++] = op_origem;
+      operacoes[num_operacoes++] = op_destino;
+
+      printf("Transferência realizada com sucesso.\n");
+  }
+
 
 
 
