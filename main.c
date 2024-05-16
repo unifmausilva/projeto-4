@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 //   gcc *.c & ./a.out
 #include <stdio.h>
@@ -52,6 +52,7 @@ int main() {
                 printf("%d\n",total_clientes);
                 listarClientes(clientes, total_clientes);
                 break;
+
             case 4:
                 printf("Digite o CPF do cliente para fazer o debito: ");
                 if (scanf("%s", cpf) != 1) {
@@ -111,6 +112,7 @@ int main() {
     case 5:
     printf("Depósito");
     break;
+
     case 6:
     printf("Extrato");
     break;
