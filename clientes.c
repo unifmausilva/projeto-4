@@ -148,6 +148,50 @@ void listar_clientes(Cliente clientes[], int num_clientes) {
 
     printf("Depósito realizado com sucesso.\n");
   }
+  void extrato(Cliente clientes[], int num_clientes) {
+      char cpf[12];
+      printf("Digite o CPF do cliente: ");
+      scanf("%s", cpf);
+
+      Cliente *cliente = buscar_cliente_por_cpf(clientes, num_clientes, cpf);
+      if (cliente == NULL) {
+          printf("Cliente não encontrado.\n");
+          return;
+      }
+
+      printf("Senha: ");
+      char senha[5];
+      scanf("%s", senha);
+
+      if (strcmp(cliente->senha, senha) != 0) {
+          printf("Senha incorreta.\n");
+          return;
+      }
+
+      printf("Extrato do cliente %s:\n", cliente->nome);
+      printf("Saldo atual: R$%.2f\n", cliente->saldo);
+      printf("Operações realizadas:\n");
+
+      int i;
+      for (i = 0; i < num_operacoes; i++) {
+          if (strcmp(operacoes[i].cpf_cliente, cpf) == 0) {
+              printf("- Tipo: ");
+              switch (operacoes[i].tipo) {
+                  case DEPOSITO:
+                      printf("Depósito\n");
+                      break;
+                  case SAQUE:
+                      printf("Débito\n");
+                      break;
+                  case TRANSFERENCIA:
+                      printf("Transferência\n");
+                      break;
+              }
+              printf("  Valor: R$%.2f\n", operacoes[i].valor);
+              printf("  Tarifa: R$%.2f\n", operacoes[i].tarifa);
+          }
+      }
+  }
 
 
 

@@ -95,36 +95,6 @@ int main() {
         }
     } while (opcao != 0);
 
-  switch (opcao){
-    case 1:
-    printf("Cadastrar cliente");
-    break;
-    case 2:
-    printf("Apagar cliente");
-    break;
-    case 3:
-    printf("Listar clientes");
-
-    break;
-    case 4:
-    printf("Débito");
-    break;
-    case 5:
-    printf("Depósito");
-    break;
-
-    case 6:
-    printf("Extrato");
-    break;
-    case 7:
-    printf("Transferência entre contas");
-    break;
-    case 8:
-    printf("Sair");
-    break;
-    default:
-    printf("Opção inválida");
-    break;  
 
   }while(opcao  != 8);
   return 0;
