@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 //   gcc *.c & ./a.out
 #include <stdio.h>
@@ -102,6 +103,7 @@ int main() {
     break;
     case 3:
     printf("Listar clientes");
+
     break;
     case 4:
     printf("Débito");

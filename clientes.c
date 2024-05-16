@@ -1,65 +1,73 @@
-#include <stdio.h>
-#include "clientes.h"
-
-
-void escolhaconta(){
- int escolha;
-  printf("-----TIPOS DE CONTA-----\n");
-  printf("1 - Conta Comum ");
-  printf("\n");
-  printf("2 - Conta Plus ");
-  if(scanf("%d", &escolha) != 1){
-    printf("Erro ao ler a opção\n");
-    
+void cadastrar_cliente(Cliente clientes[], int *num_clientes) {
+  if (*num_clientes >= MAX_CLIENTES) {
+      printf("Limite máximo de clientes atingido.\n");
+      return;
   }
-  if (escolha == 1){
-    printf("Você escolheu a conta comum\n");
-  }else if(escolha == 2){
-    printf("Você escolheu a conta plus\n");
-  }else{
-    printf("Opção inválida, tente novamente\n");
-  }
-  
-  
-}
-void deposito_inicial(){
-  int pdeposito;
 
-   while(1){
-     
-     printf("OBS: O valor minimo de deposito é de R$100,00\n");
-     printf("VALOR:");
-     if(scanf("%d", &pdeposito) != 1){
-     printf("Erro ao ler a opção\n");
-      }
-     
-     if(pdeposito < 100){
-      printf("Valor minimo de deposito é de R$100,00\n");
-        
-      } else if(pdeposito >= 100){
-       printf("Valor depositado com sucesso\n");
-      }
-    }
+  Cliente novo_cliente;
+
+  printf("Nome: ");
+  scanf("%s", novo_cliente.nome);
+
+  printf("CPF (apenas números): ");
+  scanf("%s", novo_cliente.cpf);
+
+  printf("Tipo de conta (0 para Comum, 1 para Plus): ");
+  int tipo_conta;
+  scanf("%d", &tipo_conta);
+  novo_cliente.tipo_conta = (tipo_conta == 1) ? PLUS : COMUM;
+
+  printf("Saldo inicial: ");
+  scanf("%f", &novo_cliente.saldo);
+
+  printf("Senha (4 dígitos): ");
+  scanf("%s", novo_cliente.senha);
+
+  clientes[*num_clientes] = novo_cliente;
+  (*num_clientes)++;
+
+  printf("Cliente cadastrado com sucesso.\n");
 }
 
-void cadastrar_cliente(){
-  printf("===========================");
-  printf("CADASTRAR NOVO CLIENTE\n");
-  printf("Digite o seu nome:\n");
-  printf("Digite seu CPF:\n");
-  printf("Digite qual conta você deseja abrir:\n");
-  escolhaconta();
-  printf("---Faca um depósito inicial--- \n");
-  deposito_inicial();
-  printf("Digite uma senha de 4 digitos: \n");
-  printf("===========================");
+void apagar_cliente(Cliente clientes[], int *num_clientes) {
+  char cpf[12];
+  printf("Digite o CPF do cliente a ser removido: ");
+  scanf("%s", cpf);
 
-  if(scanf("%d" , &deposito ) != 1){
-    printf("Erro ao ler a opção\n");
-    return 1;
+  int i;
+  for (i = 0; i < *num_clientes; i++) {
+      if (strcmp(clientes[i].cpf, cpf) == 0) {
+          printf("Cliente encontrado: %s - %s\n", clientes[i].nome, clientes[i].cpf);
+          printf("Confirma a remoção? (S/N): ");
+          char confirmacao;
+          scanf(" %c", &confirmacao);
+          if (confirmacao == 'S' || confirmacao == 's') {
+              // Remover cliente
+              int j;
+              for (j = i; j < (*num_clientes - 1); j++) {
+                  clientes[j] = clientes[j + 1];
+              }
+              (*num_clientes)--;
+              printf("Cliente removido com sucesso.\n");
+          } else {
+              printf("Remoção cancelada.\n");
+          }
+          return;
+      }
   }
 
-  if(scanf("%d" , &))
-  
-  
+  printf("Cliente com CPF %s não encontrado.\n", cpf);
+}
+
+void listar_clientes(Cliente clientes[], int num_clientes) {
+  if (num_clientes == 0) {
+      printf("Nenhum cliente cadastrado.\n");
+      return;
+  }
+
+  printf("Lista de clientes:\n");
+  int i;
+  for (i = 0; i < num_clientes; i++) {
+      printf("%d. %s - %s - Saldo: %.2f\n", i + 1, clientes[i].nome, clientes[i].cpf, clientes[i].saldo);
+  }
 }
