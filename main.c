@@ -1,6 +1,7 @@
 
-
 //   gcc *.c & ./a.out
+
+>>>>>>> 6c3e9ae (modificando as funçoes)
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,12 +9,16 @@
 #include "clientes.h"
 
 int main() {
+    Cliente listaClientes[MAX_CLIENTES];
+    Operacao listaOperacoes[MAX_OPERACOES];
+    int quantidadeClientes = 0;
+    int quantidadeOperacoes = 0;
     int opcao;
 
     do {
-        printf("\nMenu de opções:\n");
+        printf("\nMenu:\n");
         printf("1. Novo cliente\n");
-        printf("2. Apaga cliente\n");
+        printf("2. Apagar cliente\n");
         printf("3. Listar clientes\n");
         printf("4. Débito\n");
         printf("5. Depósito\n");
@@ -28,7 +33,7 @@ int main() {
         }
 
         switch (opcao) {
-<<<<<<< HEAD
+
             case 1:
                 novoCliente(clientes, &total_clientes);
                 break;
