@@ -39,6 +39,7 @@ int autenticar_cliente(Cliente *cliente);
 void debitar(Cliente clientes[], int num_clientes);
 void depositar(Cliente clientes[], int num_clientes);
 void extrato(Cliente clientes[], int num_clientes);
+void transferencia(Cliente clientes[], int num_clientes);
 
 
 

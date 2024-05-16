@@ -28,35 +28,36 @@ int main() {
         scanf("%d", &opcao);
 
         switch (opcao) {
-            case 1:
-                cadastrar_cliente(clientes, &num_clientes);
+          case 1:
+            cadastrar_cliente(clientes, &num_clientes);
                 break;
-            case 2:
-                apagar_cliente(clientes, &num_clientes);
+          case 2:
+            apagar_cliente(clientes, &num_clientes);
                 break;
-            case 3:
-                listar_clientes(clientes, num_clientes);
+          case 3:
+            listar_clientes(clientes, num_clientes);
                 break;
           case 4:
-              debitar(clientes, num_clientes);
+            debitar(clientes, num_clientes);
               break;
           case 5:
-              depositar(clientes, num_clientes);
+            depositar(clientes, num_clientes);
               break;
           case 6:
-          extrato(clientes, num_clientes);
-          break;
-    case 7:
-    printf("Transferência entre contas");
-    break;
-    case 8:
-    printf("Sair");
-    break;
-    default:
-    printf("Opção inválida");
-    break;  
+            extrato(clientes, num_clientes);
+            break;
+          case 7:
+            transferencia(clientes, num_clientes);
+            break;
+          case 0:// Sair e salvar dados
+            salvar_clientes(clientes, num_clientes);
+            salvar_operacoes(operacoes, num_operacoes);
+            printf("Encerrando o programa.\n");
+            break;
+                  default:
+                      printf("Opção inválida.\n");
+              }
+          } while (opcao != 0);
 
-  }while(opcao  != 8);
-  return 0;
-
-}
+          return 0;
+      }
