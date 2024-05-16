@@ -34,7 +34,10 @@ typedef struct {
 void cadastrar_cliente(Cliente clientes[], int *num_clientes);
 void apagar_cliente(Cliente clientes[], int *num_clientes);
 void listar_clientes(Cliente clientes[], int num_clientes);
-
+Cliente *buscar_cliente_por_cpf(Cliente clientes[], int num_clientes, const char *cpf);
+int autenticar_cliente(Cliente *cliente);
+void debitar(Cliente clientes[], int num_clientes);
+void depositar(Cliente clientes[], int num_clientes);
 
 
 

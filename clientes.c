@@ -70,4 +70,88 @@ void listar_clientes(Cliente clientes[], int num_clientes) {
   for (i = 0; i < num_clientes; i++) {
       printf("%d. %s - %s - Saldo: %.2f\n", i + 1, clientes[i].nome, clientes[i].cpf, clientes[i].saldo);
   }
+  void debitar(Cliente clientes[], int num_clientes) {
+    char cpf[12];
+    printf("Digite o CPF do cliente: ");
+    scanf("%s", cpf);
+
+    Cliente *cliente = buscar_cliente_por_cpf(clientes, num_clientes, cpf);
+    if (cliente == NULL) {
+        printf("Cliente não encontrado.\n");
+        return;
+    }
+
+    printf("Senha: ");
+    char senha[5];
+    scanf("%s", senha);
+
+    if (strcmp(cliente->senha, senha) != 0) {
+        printf("Senha incorreta.\n");
+        return;
+    }
+
+    float valor;
+    printf("Valor do débito: ");
+    scanf("%f", &valor);
+
+    if (cliente->tipo_conta == COMUM) {
+        // Verifica saldo negativo máximo permitido
+        if (cliente->saldo - valor < -1000) {
+            printf("Saldo negativo máximo excedido.\n");
+            return;
+        }
+        // Aplica taxa de débito
+        valor *= 1.05; // 5% de taxa
+    } else if (cliente->tipo_conta == PLUS) {
+        // Verifica saldo negativo máximo permitido
+        if (cliente->saldo - valor < -5000) {
+            printf("Saldo negativo máximo excedido.\n");
+            return;
+        }
+        // Aplica taxa de débito
+        valor *= 1.03; // 3% de taxa
+    }
+
+    // Atualiza o saldo do cliente
+    cliente->saldo -= valor;
+
+    // Registra a operação
+    Operacao op = {SAQUE, "", valor, valor * 0.05}; // Tarifa de 5% em todos os saques
+    strcpy(op.cpf_cliente, cpf);
+    operacoes[num_operacoes++] = op;
+
+    printf("Débito realizado com sucesso.\n");
+  }
+
+  void depositar(Cliente clientes[], int num_clientes) {
+    char cpf[12];
+    printf("Digite o CPF do cliente: ");
+    scanf("%s", cpf);
+
+    Cliente *cliente = buscar_cliente_por_cpf(clientes, num_clientes, cpf);
+    if (cliente == NULL) {
+        printf("Cliente não encontrado.\n");
+        return;
+    }
+
+    float valor;
+    printf("Valor do depósito: ");
+    scanf("%f", &valor);
+
+    // Atualiza o saldo do cliente
+    cliente->saldo += valor;
+
+    // Registra a operação
+    Operacao op = {DEPOSITO, "", valor, 0}; // Depósito não possui tarifa
+    strcpy(op.cpf_cliente, cpf);
+    operacoes[num_operacoes++] = op;
+
+    printf("Depósito realizado com sucesso.\n");
+  }
+
+
+
+
+
+  
 }

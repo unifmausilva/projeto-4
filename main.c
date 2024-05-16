@@ -37,13 +37,12 @@ int main() {
             case 3:
                 listar_clientes(clientes, num_clientes);
                 break;
-    break;
-    case 4:
-    printf("Débito");
-    break;
-    case 5:
-    printf("Depósito");
-    break;
+          case 4:
+              debitar(clientes, num_clientes);
+              break;
+          case 5:
+              depositar(clientes, num_clientes);
+              break;
     case 6:
     printf("Extrato");
     break;
