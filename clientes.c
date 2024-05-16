@@ -247,6 +247,58 @@ void listar_clientes(Cliente clientes[], int num_clientes) {
 
       printf("Transferência realizada com sucesso.\n");
   }
+  void salvar_clientes(Cliente clientes[], int num_clientes) {
+    FILE *arquivo = fopen("clientes.bin", "wb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    fwrite(&num_clientes, sizeof(int), 1, arquivo);
+    fwrite(clientes, sizeof(Cliente), num_clientes, arquivo);
+
+    fclose(arquivo);
+  }
+
+  void carregar_clientes(Cliente clientes[], int *num_clientes) {
+    FILE *arquivo = fopen("clientes.bin", "rb");
+    if (arquivo ==    NULL) {
+        printf("Arquivo de clientes não encontrado.\n");
+        return;
+      }
+
+      fread(num_clientes, sizeof(int), 1, arquivo);
+      fread(clientes, sizeof(Cliente), *num_clientes, arquivo);
+
+      fclose(arquivo);
+      }
+
+      void salvar_operacoes(Operacao operacoes[], int num_operacoes) {
+      FILE *arquivo = fopen("operacoes.bin", "wb");
+      if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+      }
+
+      fwrite(&num_operacoes, sizeof(int), 1, arquivo);
+      fwrite(operacoes, sizeof(Operacao), num_operacoes, arquivo);
+
+      fclose(arquivo);
+      }
+
+      void carregar_operacoes(Operacao operacoes[], int *num_operacoes) {
+      FILE *arquivo = fopen("operacoes.bin", "rb");
+      if (arquivo == NULL) {
+        printf("Arquivo de operações não encontrado.\n");
+        return;
+      }
+
+      fread(num_operacoes, sizeof(int), 1, arquivo);
+      fread(operacoes, sizeof(Operacao), *num_operacoes, arquivo);
+
+      fclose(arquivo);
+      }
+
 
 
 
