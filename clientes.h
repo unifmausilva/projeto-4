@@ -1,28 +1,31 @@
+// clientes.h
 #ifndef CLIENTES_H
 #define CLIENTES_H
 
 #define MAX_CLIENTES 1000
-
-typedef enum {
-    COMUM,
-    PLUS
-} TipoConta;
+#define MAX_OPERACOES 100
 
 typedef struct {
     char nome[50];
     char cpf[12];
-    TipoConta tipo_conta;
+    char tipoConta[6];
     float saldo;
-    float limite_negativo;
     char senha[20];
 } Cliente;
 
-void novoCliente();
-void apagaCliente();
-void listarClientes();
-void debito();
-void deposito();
-void extrato();
-void transferencia();
+typedef struct {
+    char cpf[12];
+    char tipoOperacao[15];
+    float valorOperacao;
+    float saldoAtual;
+} Operacao;
+
+void novoCliente(Cliente listaClientes[], int *quantidadeClientes);
+void apagaCliente(Cliente listaClientes[], int *quantidadeClientes);
+void listarClientes(Cliente listaClientes[], int quantidadeClientes);
+void debito(Cliente listaClientes[], int quantidadeClientes, Operacao listaOperacoes[], int *quantidadeOperacoes);
+void deposito(Cliente listaClientes[], int quantidadeClientes, Operacao listaOperacoes[], int *quantidadeOperacoes);
+void extrato(Cliente listaClientes[], int quantidadeClientes, Operacao listaOperacoes[], int quantidadeOperacoes);
+void transferencia(Cliente listaClientes[], int quantidadeClientes, Operacao listaOperacoes[], int *quantidadeOperacoes);
 
 #endif // CLIENTES_H
