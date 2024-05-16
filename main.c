@@ -1,63 +1,52 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "clientes.h"
 
 int main() {
-    Cliente clientes[MAX_CLIENTES];
-    Operacao operacoes[MAX_OPERACOES];
-    int num_clientes = 0;
-    int num_operacoes = 0;
     int opcao;
 
-    // Carregar clientes e operações do arquivo
-    carregar_clientes(clientes, &num_clientes);
-    carregar_operacoes(operacoes, &num_operacoes);
-
-    // Loop principal do programa
     do {
-        printf("\n===== Menu =====\n");
-        printf("1. Novo Cliente\n");
-        printf("2. Apagar Cliente\n");
-        printf("3. Listar Clientes\n");
+        printf("\nMenu de opções:\n");
+        printf("1. Novo cliente\n");
+        printf("2. Apaga cliente\n");
+        printf("3. Listar clientes\n");
         printf("4. Débito\n");
         printf("5. Depósito\n");
         printf("6. Extrato\n");
         printf("7. Transferência Entre Contas\n");
         printf("0. Sair\n");
-        printf("===============\n");
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
 
-        switch (opcao) {
-          case 1:
-            cadastrar_cliente(clientes, &num_clientes);
+        switch(opcao) {
+            case 1:
+                novoCliente();
                 break;
-          case 2:
-            apagar_cliente(clientes, &num_clientes);
+            case 2:
+                apagaCliente();
                 break;
-          case 3:
-            listar_clientes(clientes, num_clientes);
+            case 3:
+                listarClientes();
                 break;
-          case 4:
-            debitar(clientes, num_clientes);
-              break;
-          case 5:
-            depositar(clientes, num_clientes);
-              break;
-          case 6:
-            extrato(clientes, num_clientes);
-            break;
-          case 7:
-            transferencia(clientes, num_clientes);
-            break;
-          case 0:// Sair e salvar dados
-            salvar_clientes(clientes, num_clientes);
-            salvar_operacoes(operacoes, num_operacoes);
-            printf("Encerrando o programa.\n");
-            break;
-                  default:
-                      printf("Opção inválida.\n");
-              }
-          } while (opcao != 0);
+            case 4:
+                debito();
+                break;
+            case 5:
+                deposito();
+                break;
+            case 6:
+                extrato();
+                break;
+            case 7:
+                transferencia();
+                break;
+            case 0:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida!\n");
+        }
+    } while(opcao != 0);
 
-          return 0;
-      }
+    return 0;
+}
