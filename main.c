@@ -8,13 +8,17 @@
 
 
 
+
 int encontrarCliente(Cliente clientes[], int total_clientes, char cpf[]) {
+
     for (int i = 0; i < total_clientes; i++) {
         if (strcmp(clientes[i].cpf, cpf) == 0) {
             return i;
         }
     }
+
     return -1; 
+
 }
 
 
@@ -25,7 +29,7 @@ int main() {
     int opcao;
     char cpf[12];
     int indice_cliente;
-    printf("aaa%d\n",total_clientes);
+
     do {
         printf("\nMenu de Opcoes:\n");
         printf("1. Novo cliente\n");
@@ -59,6 +63,7 @@ int main() {
                 listarClientes(clientes, total_clientes);
                 break;
             case 4:
+
                 printf("Digite o CPF do cliente para fazer o debito: ");
                 if (scanf("%s", cpf) != 1) {
                     printf("CPF inválido\n");
@@ -67,11 +72,13 @@ int main() {
                 indice_cliente = encontrarCliente(clientes, total_clientes, cpf);
                 if (indice_cliente != -1) {
                     debito(clientes, total_clientes);
+
                 } else {
                     printf("Cliente não encontrado.\n");
                 }
                 break;
             case 5:
+
                 printf("Digite o CPF do cliente para fazer o deposito: ");
                 if (scanf("%s", cpf) != 1) {
                     printf("CPF inválido.\n");
@@ -80,22 +87,28 @@ int main() {
                 indice_cliente = encontrarCliente(clientes, total_clientes, cpf);
                 if (indice_cliente != -1) {
                     deposito(clientes, total_clientes);
+
                 } else {
                     printf("Cliente não encontrado.\n");
                 }
                 break;
             case 6:
+
                     extrato(clientes, total_clientes); 
+
+
                 break;
             case 7:
                 transferencia(clientes, total_clientes);
                 break;
             case 0:
                 salvarClientes(clientes, total_clientes);
+
                 printf("Saindo\n");
                 break;
             default:
                 printf("Opção invalida\n");
+
                 break;
         }
     } while (opcao != 0);
