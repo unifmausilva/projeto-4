@@ -22,7 +22,10 @@ int main() {
         printf("0. Sair\n");
 
         printf("Escolha uma opção: ");
-        scanf("%d", &opcao);
+        if(scanf("%d", &opcao) != 1){
+            printf("Erro ao ler a opção.\n");
+            return 1;
+        }
 
 switch (opcao) {
     case 1:
