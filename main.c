@@ -27,10 +27,11 @@ int main() {
         printf("0. Sair\n");
         printf("Escolha uma opcao: ");
 
+
         if (scanf("%d", &opcao) != 1) {
             printf("Erro\n");
             continue;
-        }
+
 
         switch (opcao) {
 

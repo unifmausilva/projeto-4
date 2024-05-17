@@ -8,15 +8,30 @@ void novoCliente(Cliente listaClientes[], int *quantidadeClientes) {
     if (*quantidadeClientes < MAX_CLIENTES) {
         Cliente novoCliente;
         printf("Nome: ");
-        scanf("%s", novoCliente.nome);
+        if(scanf("%s", novoCliente.nome) != 1) {
+            printf("Erro ao ler o Nome.\n");
+            return;
+        }
         printf("CPF: ");
-        scanf("%s", novoCliente.cpf);
+        if(scanf("%s", novoCliente.cpf) != 1) {
+            printf("Erro ao ler o CPF.\n");
+            return;
+        }
         printf("Tipo de conta (Comum/Plus): ");
-        scanf("%s", novoCliente.tipoConta);
+        if(scanf("%s", novoCliente.tipoConta) != 1 ){
+            printf("Erro ao ler o tipo de conta.\n");
+                return;
+        }
         printf("Saldo inicial: ");
-        scanf("%f", &novoCliente.saldo);
+        if(scanf("%f", &novoCliente.saldo) != 1){
+            printf("Erro ao ler o saldo inicial.\n");
+            return;
+        }
         printf("Senha: ");
-        scanf("%s", novoCliente.senha);
+        if(scanf("%s", novoCliente.senha) != 1){
+            printf("Erro ao ler a senha.\n");
+            return;
+        }
 
         listaClientes[*quantidadeClientes] = novoCliente;
         (*quantidadeClientes)++;
@@ -30,7 +45,10 @@ void novoCliente(Cliente listaClientes[], int *quantidadeClientes) {
 void apagaCliente(Cliente listaClientes[], int *quantidadeClientes) {
     char cpfApagar[12];
     printf("Digite o CPF do cliente a ser apagado: ");
-    scanf("%s", cpfApagar);
+    if(scanf("%s", cpfApagar) != 1){
+        printf("Erro ao ler o CPF.\n");
+        return;
+    }
 
     int indiceApagar = -1;
     for (int i = 0; i < *quantidadeClientes; i++) {
@@ -68,11 +86,20 @@ void debito(Cliente listaClientes[], int quantidadeClientes, Operacao listaOpera
     char senha[20];
     float valor;
     printf("CPF: ");
-    scanf("%s", cpf);
+    if(scanf("%s", cpf)!=1){
+        printf("Erro ao ler o CPF.\n");
+        return;
+    }
     printf("Senha: ");
-    scanf("%s", senha);
+    if(scanf("%s", senha)!=1){
+        printf("Erro ao ler a senha.\n");
+        return;
+    }
     printf("Valor a debitar: ");
-    scanf("%f", &valor);
+    if(scanf("%f", &valor)!=1){
+        printf("Erro ao ler o valor.\n");
+        return;
+    }
 
     int indiceCliente = -1;
     for (int i = 0; i < quantidadeClientes; i++) {
@@ -88,8 +115,8 @@ void debito(Cliente listaClientes[], int quantidadeClientes, Operacao listaOpera
             printf("Débito realizado com sucesso!\n");
 
             // Registrar a operação
-            strcpy(listaOperacoes[*quantidadeOperacoes].cpf, cpf);
-            strcpy(listaOperacoes[*quantidadeOperacoes].tipoOperacao, "Débito");
+            strncpy(listaOperacoes[*quantidadeOperacoes].cpf, cpf, sizeof(listaOperacoes[*quantidadeOperacoes].cpf));
+            strncpy(listaOperacoes[*quantidadeOperacoes].tipoOperacao, "Débito", sizeof(listaOperacoes[*quantidadeOperacoes].tipoOperacao));
             listaOperacoes[*quantidadeOperacoes].valorOperacao = valor;
             listaOperacoes[*quantidadeOperacoes].saldoAtual = listaClientes[indiceCliente].saldo;
             (*quantidadeOperacoes)++;
@@ -99,13 +126,21 @@ void debito(Cliente listaClientes[], int quantidadeClientes, Operacao listaOpera
     } else {
         printf("CPF ou senha incorretos!\n");
     }
-}void deposito(Cliente listaClientes[], int quantidadeClientes, Operacao listaOperacoes[], int *quantidadeOperacoes) {
+}
+
+void deposito(Cliente listaClientes[], int quantidadeClientes, Operacao listaOperacoes[], int *quantidadeOperacoes) {
     char cpf[12];
     float valor;
     printf("CPF: ");
-    scanf("%s", cpf);
+    if(scanf("%s", cpf) != 1){
+        printf("Erro ao ler o CPF.\n");
+        return;
+    }
     printf("Valor a depositar: ");
-    scanf("%f", &valor);
+    if(scanf("%f", &valor) != 1){
+        printf("Erro ao ler o valor.\n");
+        return;
+    }
 
     int indiceCliente = -1;
     for (int i = 0; i < quantidadeClientes; i++) {
@@ -120,8 +155,8 @@ void debito(Cliente listaClientes[], int quantidadeClientes, Operacao listaOpera
         printf("Depósito realizado com sucesso!\n");
 
         // Registrar a operação
-        strcpy(listaOperacoes[*quantidadeOperacoes].cpf, cpf);
-        strcpy(listaOperacoes[*quantidadeOperacoes].tipoOperacao, "Depósito");
+        strncpy(listaOperacoes[*quantidadeOperacoes].cpf, cpf, sizeof(listaOperacoes[*quantidadeOperacoes].cpf));
+        strncpy(listaOperacoes[*quantidadeOperacoes].tipoOperacao, "Depósito", sizeof(listaOperacoes[*quantidadeOperacoes].tipoOperacao));
         listaOperacoes[*quantidadeOperacoes].valorOperacao = valor;
         listaOperacoes[*quantidadeOperacoes].saldoAtual = listaClientes[indiceCliente].saldo;
         (*quantidadeOperacoes)++;
@@ -134,9 +169,15 @@ void extrato(Cliente listaClientes[], int quantidadeClientes, Operacao listaOper
     char cpf[12];
     char senha[20];
     printf("CPF: ");
-    scanf("%s", cpf);
+    if(scanf("%s", cpf)!=1){
+        printf("Erro ao ler o CPF.\n");
+        return;
+    }
     printf("Senha: ");
-    scanf("%s", senha);
+    if(scanf("%s", senha)!=1){
+        printf("Erro ao ler a senha;\n");
+        return;
+    }
 
     int indiceCliente = -1;
     for (int i = 0; i < quantidadeClientes; i++) {
@@ -176,13 +217,25 @@ void transferencia(Cliente listaClientes[], int quantidadeClientes, Operacao lis
     char cpfDestino[12];
     float valor;
     printf("CPF (Origem): ");
-    scanf("%s", cpfOrigem);
+    if(scanf("%s", cpfOrigem) != 1){
+        printf("Erro ao ler o CPF (Origem).\n");
+        return;
+    }
     printf("Senha (Origem): ");
-    scanf("%s", senhaOrigem);
+    if(scanf("%s", senhaOrigem) != 1){
+        printf("Erro ao ler a senha (Origem).\n");
+        return;
+    }
     printf("CPF (Destino): ");
-    scanf("%s", cpfDestino);
+    if(scanf("%s", cpfDestino) != 1){
+        printf("Erro ao ler o CPF (Destino).\n");
+        return;
+    }
     printf("Valor a transferir: ");
-    scanf("%f", &valor);
+    if(scanf("%f", &valor) != 1){
+        printf("Erro ao ler o valor.\n");
+        return;
+    }
 
     int indiceOrigem = -1;
     int indiceDestino = -1;
@@ -202,15 +255,15 @@ void transferencia(Cliente listaClientes[], int quantidadeClientes, Operacao lis
             printf("Transferência realizada com sucesso!\n");
 
             // Registrar a operação na conta de origem
-            strcpy(listaOperacoes[*quantidadeOperacoes].cpf, cpfOrigem);
-            strcpy(listaOperacoes[*quantidadeOperacoes].tipoOperacao, "Transferência (Saída)");
+            strncpy(listaOperacoes[*quantidadeOperacoes].cpf, cpfOrigem, sizeof(listaOperacoes[*quantidadeOperacoes].cpf));
+            strncpy(listaOperacoes[*quantidadeOperacoes].tipoOperacao, "Transferência (Saída)", sizeof(listaOperacoes[*quantidadeOperacoes].tipoOperacao));
             listaOperacoes[*quantidadeOperacoes].valorOperacao = valor;
             listaOperacoes[*quantidadeOperacoes].saldoAtual = listaClientes[indiceOrigem].saldo;
             (*quantidadeOperacoes)++;
 
             // Registrar a operação na conta de destino
-            strcpy(listaOperacoes[*quantidadeOperacoes].cpf, cpfDestino);
-            strcpy(listaOperacoes[*quantidadeOperacoes].tipoOperacao, "Transferência (Entrada)");
+            strncpy(listaOperacoes[*quantidadeOperacoes].cpf, cpfDestino, sizeof(listaOperacoes[*quantidadeOperacoes].cpf));
+            strncpy(listaOperacoes[*quantidadeOperacoes].tipoOperacao, "Transferência (Entrada)", sizeof(listaOperacoes[*quantidadeOperacoes].tipoOperacao));
             listaOperacoes[*quantidadeOperacoes].valorOperacao = valor;
             listaOperacoes[*quantidadeOperacoes].saldoAtual = listaClientes[indiceDestino].saldo;
             (*quantidadeOperacoes)++;
