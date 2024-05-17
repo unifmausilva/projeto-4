@@ -12,6 +12,7 @@ typedef struct {
     float saldo_negativo;
     char senha[20];
     float operacoes[MAX_OPERACOES];
+    int total_operacoes;  
 } Cliente;
 
 void salvarClientes(Cliente clientes[], int total_clientes);
@@ -19,6 +20,9 @@ int carregarClientes(Cliente clientes[]);
 void novoCliente(Cliente clientes[], int *total_clientes);
 void apagarCliente(Cliente clientes[], int *total_clientes);
 void listarClientes(Cliente clientes[], int total_clientes);
-
+void debito(Cliente *cliente);
+void deposito(Cliente *cliente);
+void extrato(Cliente *cliente);
+void transferencia(Cliente clientes[], int total_clientes);
 
 #endif 
