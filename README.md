@@ -14,7 +14,7 @@ Este é um sistema bancário simples implementado em C. Ele permite que os usuá
 
 - **deposito**: Realiza um depósito na conta de um cliente.
 
-- **extrato**: Gera um extrato para um cliente, incluindo todas as operações realizadas.
+- **extrato**: Abre um extrato para um cliente em um novo arquivo separado do terminal, incluindo todas as operações realizadas.
 
 - **transferencia**: Permite transferir fundos entre duas contas de clientes, verificando se o saldo é suficiente na conta de origem.
 
