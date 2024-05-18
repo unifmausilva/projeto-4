@@ -1,15 +1,16 @@
+//   gcc *.c & ./a.out
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "banco.h"
 
-int encontrarClientePorCPF(Cliente clientes[], int total_clientes, char cpf[]) {
+int encontrarCliente(Cliente clientes[], int total_clientes, char cpf[]) {
     for (int i = 0; i < total_clientes; i++) {
         if (strcmp(clientes[i].cpf, cpf) == 0) {
             return i;
         }
     }
-    return -1; // Cliente não encontrado
+    return -1; 
 }
 
 int main() {
@@ -19,7 +20,7 @@ int main() {
     int opcao;
     char cpf[12];
     int indice_cliente;
-
+    printf("aaa%d\n",total_clientes);
     do {
         printf("\nMenu de Opcoes:\n");
         printf("1. Novo cliente\n");
@@ -31,7 +32,11 @@ int main() {
         printf("7. Transferencia Entre Contas\n");
         printf("0. Sair\n");
         printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
+
+        if (scanf("%d", &opcao) != 1) {
+            printf("Erro\n");
+            continue;
+        }
 
         switch (opcao) {
             case 1:
@@ -40,48 +45,48 @@ int main() {
             case 2:
                 apagarCliente(clientes, &total_clientes);
                 break;
-            case 3:
+            case 3: 
+                printf("%d\n",total_clientes);
                 listarClientes(clientes, total_clientes);
                 break;
             case 4:
-                printf("Digite o CPF do cliente para debito: ");
-                scanf("%s", cpf);
-                indice_cliente = encontrarClientePorCPF(clientes, total_clientes, cpf);
+                printf("Digite o CPF do cliente para fazer o debito: ");
+                if (scanf("%s", cpf) != 1) {
+                    printf("CPF inválido\n");
+                    continue;
+                }
+                indice_cliente = encontrarCliente(clientes, total_clientes, cpf);
                 if (indice_cliente != -1) {
-                    debito(&clientes[indice_cliente]);
+                    debito(clientes, total_clientes);
                 } else {
                     printf("Cliente não encontrado.\n");
                 }
                 break;
             case 5:
-                printf("Digite o CPF do cliente para deposito: ");
-                scanf("%s", cpf);
-                indice_cliente = encontrarClientePorCPF(clientes, total_clientes, cpf);
+                printf("Digite o CPF do cliente para fazer o deposito: ");
+                if (scanf("%s", cpf) != 1) {
+                    printf("CPF inválido.\n");
+                    continue;
+                }
+                indice_cliente = encontrarCliente(clientes, total_clientes, cpf);
                 if (indice_cliente != -1) {
-                    deposito(&clientes[indice_cliente]);
+                    deposito(clientes, total_clientes);
                 } else {
                     printf("Cliente não encontrado.\n");
                 }
                 break;
             case 6:
-                printf("Digite o CPF do cliente para extrato: ");
-                scanf("%s", cpf);
-                indice_cliente = encontrarClientePorCPF(clientes, total_clientes, cpf);
-                if (indice_cliente != -1) {
-                    extrato(&clientes[indice_cliente]);
-                } else {
-                    printf("Cliente não encontrado.\n");
-                }
+                    extrato(clientes, total_clientes); 
                 break;
             case 7:
                 transferencia(clientes, total_clientes);
                 break;
             case 0:
                 salvarClientes(clientes, total_clientes);
-                printf("Saindo...\n");
+                printf("Saindo\n");
                 break;
             default:
-                printf("Opcao invalida!\n");
+                printf("Opção invalida\n");
                 break;
         }
     } while (opcao != 0);

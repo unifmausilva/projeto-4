@@ -49,7 +49,7 @@ void novoCliente(Cliente clientes[], int *total_clientes) {
     clientes[*total_clientes] = novo_cliente;
     (*total_clientes)++;
     salvarClientes(clientes, *total_clientes);
-    printf("Cliente adicionado com sucesso!\n");
+    printf("Cliente adicionado\n");
 }
 
 void apagarCliente(Cliente clientes[], int *total_clientes) {
@@ -69,7 +69,7 @@ void apagarCliente(Cliente clientes[], int *total_clientes) {
         }
         (*total_clientes)--;
         salvarClientes(clientes, *total_clientes);
-        printf("Cliente apagado com sucesso!\n");
+        printf("Cliente apagado\n");
     } else {
         printf("Cliente não encontrado.\n");
     }
@@ -77,8 +77,9 @@ void apagarCliente(Cliente clientes[], int *total_clientes) {
 
 void listarClientes(Cliente clientes[], int total_clientes) {
     printf("Lista de Clientes:\n");
+    printf("%d\n",total_clientes);
     for (int i = 0; i < total_clientes; i++) {
-        printf("Nome: %s, CPF: %s\n", clientes[i].nome, clientes[i].cpf);
+        printf("Nome: %s , CPF: %s, Saldo: %f, Tipo de conta: %s", clientes[i].nome, clientes[i].cpf,  clientes[i].saldo,  clientes[i].tipo_conta);
     }
 }
 
@@ -101,9 +102,9 @@ void debito(Cliente clientes[], int total_clientes) {
             float taxa = strcmp(clientes[i].tipo_conta, "comum") == 0 ? 0.05 * valor : 0.03 * valor;
             if (clientes[i].saldo - valor - taxa >= clientes[i].saldo_negativo) {
                 clientes[i].saldo -= (valor + taxa);
-                printf("Débito realizado com sucesso. Novo saldo: %.2f\n", clientes[i].saldo);
+                printf("Débito realizado %.2f\n", clientes[i].saldo);
             } else {
-                printf("Saldo insuficiente para realizar o débito.\n");
+                printf("Saldo insuficiente\n");
             }
             break;
         }
@@ -119,7 +120,7 @@ void deposito(Cliente clientes[], int total_clientes) {
 
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
-    printf("Digite o valor a ser depositado: ");
+    printf("Digite o valor que sera depositado: ");
     scanf("%f", &valor);
 
     int cliente_encontrado = 0;
@@ -127,7 +128,7 @@ void deposito(Cliente clientes[], int total_clientes) {
         if (strcmp(clientes[i].cpf, cpf) == 0) {
             cliente_encontrado = 1;
             clientes[i].saldo += valor;
-            printf("Depósito realizado com sucesso. Novo saldo: %.2f\n", clientes[i].saldo);
+            printf("Depósito realizado. %.2f\n", clientes[i].saldo);
             break;
         }
     }
@@ -143,7 +144,8 @@ void extrato(Cliente clientes[], int total_clientes) {
     float taxa;
     float valor;
     int cliente_encontrado = 0;
-
+  
+    
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
     printf("Digite a senha: ");
@@ -185,13 +187,13 @@ void transferencia(Cliente clientes[], int total_clientes) {
     char cpf_destino[12];
     float valor;
 
-    printf("Digite o CPF da conta de origem: ");
+    printf("Digite o CPF de origem: ");
     scanf("%s", cpf_origem);
-    printf("Digite a senha da conta de origem: ");
+    printf("Digite a senha: ");
     scanf("%s", senha_origem);
-    printf("Digite o CPF da conta de destino: ");
+    printf("Digite o CPF de destino: ");
     scanf("%s", cpf_destino);
-    printf("Digite o valor a ser transferido: ");
+    printf("Digite o valor: ");
     scanf("%f", &valor);
 
     int cliente_origem_encontrado = 0;
@@ -225,4 +227,8 @@ void transferencia(Cliente clientes[], int total_clientes) {
         printf("CPF ou senha da conta de origem incorretos.\n");
     }
 }
-
+    
+void clearBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
